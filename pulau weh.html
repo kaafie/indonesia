@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pulau Weh - Keindahan Alam yang Masih Perawan</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      /* Background yang cocok dengan pantai tropis Pulau Weh */
+      background: linear-gradient(rgba(0, 123, 255, 0.6), rgba(0, 71, 171, 0.6)),
+                  url('https://images.unsplash.com/photo-1506743580285-b5979ca29d93?auto=format&fit=crop&w=500&h=500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #f0f0f8;
+      min-height: 100vh;
+    }
+    header {
+      background-color: rgba(0, 123, 255, 0.85);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    .content {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #007bb5;
+    }
+    #map {
+      height: 400px;
+      margin-top: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 123, 255, 0.85);
+      color: white;
+      margin-top: 2rem;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+    }
+    .social-media-icons {
+      margin-top: 1rem;
+    }
+    .social-media-icons a {
+      color: white;
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-media-icons a:hover {
+      color: #004a75;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pulau Weh</h1>
+    <p>Surga Tersembunyi di Aceh dengan Keindahan Alam yang Luar Biasa</p>
+  </header>
+
+  <div class="content">
+    <h2>Tentang Pulau Weh</h2>
+    <img src="pantai.jpg" alt="Pantai Pulau Weh">
+    <p><strong>Pulau Weh</strong> adalah pulau kecil yang terletak di ujung barat Indonesia, tepatnya di Provinsi Aceh. Pulau ini dikenal karena pantainya yang bersih, air lautnya yang jernih, dan dunia bawah laut yang masih sangat alami.</p>
+    <p>Pulau Weh menjadi tempat yang populer bagi para wisatawan yang suka menyelam atau snorkeling, karena keindahan terumbu karangnya dan kehidupan laut yang sangat beragam. Di sini, Anda juga dapat menikmati pemandangan matahari terbenam yang memukau serta suasana yang tenang dan damai, jauh dari hiruk-pikuk kota.</p>
+    
+    <h3>Aktivitas yang Dapat Dilakukan</h3>
+    <ul>
+      <li>Snorkeling di Pulau Rubiah untuk menikmati keindahan terumbu karang dan ikan-ikan tropis.</li>
+      <li>Menyelam di beberapa titik yang terkenal dengan kedalaman yang ideal untuk melihat kehidupan laut yang beragam.</li>
+      <li>Menikmati keindahan pantai dengan pasir putih yang lembut dan air laut yang jernih.</li>
+      <li>Berjalan-jalan di sekitar pulau dan menikmati udara segar serta pemandangan alam yang asri.</li>
+    </ul>
+
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Jelajah Nusantara | Pulau Weh - Keindahan Alam yang Masih Perawan
+    <div class="social-media-icons" aria-label="Media Sosial Developer">
+      <a href="https://github.com/kaafie" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/kaafie._" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+ 
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([5.8649, 95.3163], 13); // Koordinat Pulau Weh
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Membuat marker pada lokasi
+    const marker = L.marker([5.8649, 95.3163]).addTo(map);
+    const googleMapsUrl = 'https://www.google.com/maps?q=5.8649,95.3163'; // URL Google Maps
+
+    // Menambahkan Popup dengan link "Lihat di Map"
+    marker.bindPopup(`
+      <b>Pulau Weh</b><br>
+      Pantai bersih dan dunia bawah laut yang masih alami.<br>
+      <a href="${googleMapsUrl}" target="_blank" rel="noopener">Lihat di Map</a>
+    `).openPopup();
+  </script>
+
+</body>
+</html>

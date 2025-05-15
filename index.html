@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hidden Gem di Indonesia</title>
+  <meta name="description" content="Jelajahi hidden gem wisata Indonesia seperti Danau Labuan Cermin, Pulau Kanawa, dan Air Terjun Tumpak Sewu. Temukan destinasi unik yang jarang diketahui!" />
+  <meta property="og:title" content="Hidden Gem di Indonesia" />
+  <meta property="og:description" content="Temukan tempat wisata tersembunyi seperti Danau Labuan Cermin dan Pulau Kanawa." />
+  <meta property="og:image" content="URL-GAMBAR-PILIHAN.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #333;
+    }
+    header {
+      background-color: #007b5e;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .filters button {
+      background-color: #007b5e;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .filters button:hover,
+    .filters button.active {
+      background-color: #005f48;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h3 {
+      margin-top: 0;
+      color: #007b5e;
+    }
+    #map-section {
+      padding: 0 2rem 2rem;
+      text-align: center;
+    }
+    #map-section h2 {
+      color: #007b5e;
+    }
+    #map {
+      height: 400px;
+      border-radius: 10px;
+    }
+    footer {
+      background-color: #007b5e;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+    .social-media-icons {
+      margin-top: 0.5rem;
+    }
+    .social-media-icons a {
+      color: white;
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    .social-media-icons a:hover {
+      color: #d4d4d4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hidden Gem di Indonesia</h1>
+    <p>Temukan surga tersembunyi di negeri kita tercinta</p>
+  </header>
+
+  <nav class="filters">
+    <button class="active" onclick="filterCards('semua', event)">Semua</button>
+    <button onclick="filterCards('danau', event)">Danau</button>
+    <button onclick="filterCards('pantai', event)">Pantai</button>
+    <button onclick="filterCards('gunung', event)">Gunung</button>
+  </nav>
+
+  <main class="container" id="cardContainer">
+    <div class="card" data-kategori="danau">
+      <a href="danau labuan cermin.html">
+        <img src="danau labuan cermin.jpg" alt="Pemandangan Danau Labuan Cermin di Kalimantan Timur">
+      </a>
+      <div class="card-content">
+        <h3>Danau Labuan Cermin</h3>
+        <p>Berada di Kalimantan Timur, danau ini unik karena airnya dua lapis: tawar dan asin.</p>
+      </div>
+    </div>
+
+    <div class="card" data-kategori="pantai">
+      <a href="pulau kanawa.html">
+        <img src="pulau kanawa.jpg" alt="Pulau Kanawa di Labuan Bajo">
+      </a>
+      <div class="card-content">
+        <h3>Pulau Kanawa</h3>
+        <p>Sebuah pulau kecil di dekat Labuan Bajo, cocok untuk snorkeling dan diving dengan pemandangan bawah laut menakjubkan.</p>
+      </div>
+    </div>
+
+    <div class="card" data-kategori="pantai">
+      <a href="pulau weh.html">
+        <img src="pulau weh.jpg" alt="Pantai bersih di Pulau Weh, Aceh">
+      </a>
+      <div class="card-content">
+        <h3>Pulau Weh</h3>
+        <p>Terletak di ujung barat Indonesia, pulau ini memiliki pantai bersih dan dunia bawah laut yang masih alami.</p>
+      </div>
+    </div>
+
+    <div class="card" data-kategori="gunung">
+      <a href="air terjun tumpak.html">
+        <img src="air terjun tumpak sewe.jpg" alt="Air Terjun Tumpak Sewu di perbatasan Lumajang dan Malang">
+      </a>
+      <div class="card-content">
+        <h3>Air Terjun Tumpak Sewu</h3>
+        <p>Air terjun megah di perbatasan Lumajang dan Malang, dikenal sebagai Niagara-nya Indonesia.</p>
+      </div>
+    </div>
+  </main>
+
+  <section id="map-section">
+    <h2>Peta Lokasi Hidden Gem</h2>
+    <p>Jelajahi lokasi-lokasi wisata tersembunyi yang kami tampilkan di peta interaktif berikut ini.</p>
+    <div id="map"></div>
+    <noscript>
+      <p style="color: red;">Aktifkan JavaScript untuk melihat peta.</p>
+    </noscript>
+  </section>
+
+  <footer>
+    &copy; 2025 Jelajah Nusantara
+    <div class="social-media-icons" aria-label="Media Sosial Developer">
+      <a href="https://github.com/kaafie" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/kaafie._" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-2.5, 118], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const locations = [
+      { name: "Danau Labuan Cermin", coords: [1.2522, 118.6839], description: "Danau unik dengan air tawar dan asin." },
+      { name: "Pulau Kanawa", coords: [-8.494926, 119.758728], description: "Snorkeling dan diving di Labuan Bajo." },
+      { name: "Pulau Weh", coords: [5.8649, 95.3163], description: "Pantai bersih dan dunia bawah laut alami." },
+      { name: "Air Terjun Tumpak Sewu", coords: [-8.2297, 112.9203], description: "Niagara-nya Indonesia di Jawa Timur." }
+    ];
+
+    locations.forEach(loc => {
+      const marker = L.marker(loc.coords).addTo(map);
+      const googleMapsUrl = `https://www.google.com/maps?q=${loc.coords[0]},${loc.coords[1]}`;
+      const popupContent = `<b>${loc.name}</b><br>${loc.description}<br><a href="${googleMapsUrl}" target="_blank" rel="noopener">Lihat di Map</a>`;
+      marker.bindPopup(popupContent);
+    });
+
+    function filterCards(kategori, event) {
+      const cards = document.querySelectorAll('.card');
+      const buttons = document.querySelectorAll('.filters button');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        card.style.display = (kategori === 'semua' || card.dataset.kategori === kategori) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

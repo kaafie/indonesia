@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Danau Labuan Cermin - Keajaiban Dua Rasa</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      /* Background image dengan nuansa danau yang tenang */
+      background: linear-gradient(rgba(13, 71, 161, 0.6), rgba(2, 119, 189, 0.6)),
+                  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #f0f0f8;
+      min-height: 100vh;
+    }
+    header {
+      background-color: rgba(0, 121, 184, 0.85);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    .content {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #007bb5;
+    }
+    #map {
+      height: 400px;
+      margin-top: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 121, 184, 0.85);
+      color: white;
+      margin-top: 2rem;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+    }
+    .social-media-icons {
+      margin-top: 1rem;
+    }
+    .social-media-icons a {
+      color: white;
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-media-icons a:hover {
+      color: #004a75;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Danau Labuan Cermin</h1>
+    <p>Keajaiban Dua Rasa di Kalimantan Timur</p>
+  </header>
+
+  <div class="content">
+    <h2>Tentang Danau Labuan Cermin</h2>
+    <img src="labuan cermin.jpg" alt="Danau Labuan Cermin">
+    <p><strong>Danau Labuan Cermin</strong> terletak di Biduk-Biduk, Kabupaten Berau, Kalimantan Timur. Danau ini terkenal karena airnya yang sangat jernih dan memiliki dua lapisan rasa: tawar di permukaan dan asin di bagian bawah.</p>
+    <p>Fenomena ini terjadi karena pertemuan air laut dan air tanah yang tidak bercampur secara sempurna. Pengunjung dapat berenang, menyelam ringan, atau hanya bersantai di perahu sambil menikmati keindahan alami yang luar biasa.</p>
+
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Jelajah Nusantara | Danau Labuan Cermin - Surga Tersembunyi di Kalimantan
+    <div class="social-media-icons" aria-label="Media Sosial Developer">
+      <a href="https://github.com/kaafie" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/kaafie._" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+ 
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([1.2522, 118.6839], 13); // Koordinat Danau Labuan Cermin
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Membuat marker pada lokasi
+    const marker = L.marker([1.2522, 118.6839]).addTo(map);
+    const googleMapsUrl = 'https://www.google.com/maps?q=1.2522,118.6839'; // URL Google Maps
+
+    // Menambahkan Popup dengan link "Lihat di Map"
+    marker.bindPopup(`
+      <b>Danau Labuan Cermin</b><br>
+      Air jernih dua rasa: tawar & asin.<br>
+      <a href="${googleMapsUrl}" target="_blank" rel="noopener">Lihat di Map</a>
+    `).openPopup();
+  </script>
+
+</body>
+</html>

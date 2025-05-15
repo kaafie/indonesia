@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Air Terjun Tumpak Sewu - Keindahan Alam yang Memukau</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      /* Background yang cocok dengan nuansa air terjun dan alam */
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                  url('https://images.unsplash.com/photo-1562048493-7d26e356d0cd?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg4MnwwfDF8c2VhY2h8M3x8YXV0ZW1mdWwlMjB0dW1wa2ElMjBzZXclfGVufDB8fHx8fDE2NTgxNTgxMDc&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+      background-size: cover;
+      color: #f0f0f8;
+      min-height: 100vh;
+    }
+    header {
+      background-color: rgba(34, 193, 195, 0.85);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    .content {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #007bb5;
+    }
+    #map {
+      height: 400px;
+      margin-top: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(34, 193, 195, 0.85);
+      color: white;
+      margin-top: 2rem;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+    }
+    .social-media-icons {
+      margin-top: 1rem;
+    }
+    .social-media-icons a {
+      color: white;
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-media-icons a:hover {
+      color: #004a75;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Air Terjun Tumpak Sewu</h1>
+    <p>Keindahan Alam yang Memukau di Lumajang, Jawa Timur</p>
+  </header>
+
+  <div class="content">
+    <h2>Tentang Air Terjun Tumpak Sewu</h2>
+    <img src="air terjun.jpg" alt="Air Terjun Tumpak Sewu">
+    <p><strong>Air Terjun Tumpak Sewu</strong> adalah salah satu destinasi alam yang menakjubkan di Jawa Timur, tepatnya terletak di Kabupaten Lumajang. Air terjun ini terkenal dengan keindahannya yang luar biasa, dengan air yang mengalir deras dari ketinggian lebih dari 100 meter, membentuk panorama yang memukau.</p>
+    <p>Keunikannya terletak pada banyaknya aliran air yang jatuh dari tebing, memberikan kesan seolah-olah ada seribu air terjun yang mengalir bersama-sama. Air Terjun Tumpak Sewu sering dijuluki "Niagara-nya Indonesia" karena kemiripannya dengan Air Terjun Niagara di Amerika Utara.</p>
+
+    <h3>Aktivitas yang Dapat Dilakukan</h3>
+    <ul>
+      <li>Menikmati pemandangan dari berbagai titik pandang yang menawarkan perspektif berbeda dari air terjun yang megah.</li>
+      <li>Berkunjung ke dasar air terjun, di mana Anda bisa merasakan semprotan air segar dan meresapi keindahan alam.</li>
+      <li>Melakukan trekking ringan menuju lokasi air terjun yang terletak di kawasan hutan yang asri.</li>
+      <li>Fotografi, dengan latar belakang air terjun yang dramatis dan alam yang masih asri.</li>
+    </ul>
+
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Jelajah Nusantara | Air Terjun Tumpak Sewu - Keajaiban Alam Lumajang
+    <div class="social-media-icons" aria-label="Media Sosial Developer">
+      <a href="https://github.com/kaafie" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/kaafie._" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+ 
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-8.2297, 112.9203], 13); // Koordinat yang telah diubah
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Membuat marker pada lokasi baru
+    const marker = L.marker([-8.2297, 112.9203]).addTo(map);
+    const googleMapsUrl = 'https://www.google.com/maps?q=-8.2297,112.9203'; // URL Google Maps
+
+    // Menambahkan Popup dengan link "Lihat di Map"
+    marker.bindPopup(`
+      <b>Air Terjun Tumpak Sewu</b><br>
+      Keindahan alam yang memukau dengan aliran air yang spektakuler.<br>
+      <a href="${googleMapsUrl}" target="_blank" rel="noopener">Lihat di Map</a>
+    `).openPopup();
+  </script>
+
+</body>
+</html>
